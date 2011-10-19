@@ -44,23 +44,23 @@ public class ProgressBar {
         //System.out.println((float)current);
 
         Double percentage =  new Double(format.format((current/total)*100)).doubleValue();
-        String percString = padLeft(percentage.toString(), 5)+"%";
+        String percString = padLeft(percentage.toString(), 6)+"%";
         Integer totalSize = size+8;
         if(!isNew)
         {
             for(int i = totalSize; i > 0; i--)
             {
-                System.out.print("\b");
+                System.out.print("\u0008");
             }
         }
         for(int j = 0; j <= size; j++)
         {
             if(j <= (current/total)*size )
             {
-                System.out.print("^[[42m ^[[0m");
+                System.out.print("\u001b[1;42m \u001b[0m");
             }else
             {
-                System.out.print("^[[47m ^[[0m");
+                System.out.print("\u001b[1;47m \u001b[0m");
             }
         }
         System.out.print(percString);
