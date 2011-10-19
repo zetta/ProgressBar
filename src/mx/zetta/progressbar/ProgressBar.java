@@ -78,33 +78,3 @@ public class ProgressBar {
         return String.format("%1$#" + n + "s", s);  
     }
 }
-
-
-/*
-
-    $perc = round(($current/$total)*100,2);        //Percentage round off for a more clean, consistent look 
-    for($i=strlen($perc); $i<=4; $i++) $perc = ' '.$perc;    // percent indicator must be four characters, if shorter, add some spaces 
-
-    $total_size = $size + $i + 3; 
-    // if it's not first go, remove the previous bar 
-    if(!$new_bar) { 
-        for($place = $total_size; $place > 0; $place--) echo "\x08";    // echo a backspace (hex:08) to remove the previous character 
-    } 
-     
-    $bars[$label]=$current; //saves bar status for next call 
-    // output the progess bar as it should be 
-    for($place = 0; $place <= $size; $place++) { 
-        if($place <= ($current / $total * $size)) echo '^[[42m ^[[0m';    // output green spaces if we're finished through this point 
-        else echo '^[[47m ^[[0m';                    // or grey spaces if not 
-    } 
-
-    // end a bar with a percent indicator 
-    echo " $perc%"; 
-    if($current == $total) { 
-        unset($bars[$label]); 
-    } 
-
-*/
-
-
-
