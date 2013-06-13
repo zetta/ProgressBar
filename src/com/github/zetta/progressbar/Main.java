@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package mx.zetta.progressbar;
+package com.github.zetta.progressbar;
 
 /**
  *

@@ -2,7 +2,7 @@
  * Clase 
  */
 
-package mx.zetta.progressbar;
+package com.github.zetta.progressbar;
 
 import java.text.DecimalFormat;
 
@@ -17,6 +17,7 @@ public class ProgressBar {
     private Float current;
     private boolean isNew = true;
     private Integer size = 50;
+    private Integer lastSize = 0;
     private DecimalFormat format = new DecimalFormat("#,###,###,###.00");
 
     public ProgressBar(Integer total)
@@ -26,6 +27,18 @@ public class ProgressBar {
         this.current = (float) 0;
     }
 
+    public void restart(float total)
+    {
+        this.total = total;
+        this.restart();
+    }
+    
+    public void restart()
+    {
+        this.isNew = true;
+        this.current = (float) 0;
+    }
+    
     public void step(Integer current)
     {
         this.current = (float) current;
@@ -44,11 +57,13 @@ public class ProgressBar {
         //System.out.println((float)current);
 
         Double percentage =  new Double(format.format((current/total)*100)).doubleValue();
-        String percString = padLeft(percentage.toString(), 6)+"%";
-        Integer totalSize = size+8;
+        String percString = padLeft(percentage, 6)+"%";
+        //String percString = padLeft(percentage.toString(), 6)+"%";
+        //String percString = percentage.toString()+"%";
+        //Integer totalSize = size+8;
         if(!isNew)
         {
-            for(int i = totalSize; i > 0; i--)
+            for(int i = lastSize; i > 0; i--)
             {
                 System.out.print("\u0008");
             }
@@ -64,17 +79,17 @@ public class ProgressBar {
             }
         }
         System.out.print(percString);
+        lastSize = size+ 10 + percString.length(); // hrmmm no le atino
         if(current == total)
             System.out.print("\n");
         isNew = false;
     }
 
-    
-    private String padRight(String s, int n) {
-        return String.format("%1$-" + n + "s", s);  
+
+
+    private String padLeft(Double number, int length)
+    {
+        return String.format("%" + length + ".2f", number);
     }
 
-    private String padLeft(String s, int n) {
-        return String.format("%1$#" + n + "s", s);  
-    }
 }
